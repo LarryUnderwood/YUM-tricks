@@ -1,0 +1,1 @@
+yum history package-list '*' > /home/fhadmin/yum_history_temp.txt;cat /home/fhadmin/yum_history_temp.txt | grep $(yum history list | grep fhadmin | head -n 1 | awk '{print$1}')" |" > /home/fhadmin/test.txt; rm /home/fhadmin/yum_history_temp.txt
