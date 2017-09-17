@@ -1,0 +1,19 @@
+##One-liner that parses a text file created called "yum_history_temp.txt" for package update history.
+##THIS IS SPECIFIC TO VM's THAT HAVE AUTO-UPDATES ENABLED
+##
+##First get the update history for all packages and output that to a text file we can parse. We could just send this to standard out, however we'll clean this
+##up at the end of the script
+##
+#yum history package-list '*' > /home/fhadmin/yum_history_temp.txt
+##
+##Then we need to parse the file specifically for the "fhadmin" string, and output a format that is readable
+##
+#cat /home/fhadmin/yum_history_temp.txt | grep $(yum history list | grep fhadmin | head -n 1 | awk '{print$1}')" |" > /home/fhadmin/test.txt
+##
+##Now clean up the text file created in the first step
+##
+#rm /home/fhadmin/yum_history_temp.txt
+##
+##The above can be run as a one-liner like so: 
+#
+#yum history package-list '*' > /home/fhadmin/yum_history_temp.txt;cat /home/fhadmin/yum_history_temp.txt | grep $(yum history list | grep fhadmin | head -n 1 | awk '{print$1}')" |" > /home/fhadmin/test.txt; rm /home/fhadmin/yum_history_temp.txt
